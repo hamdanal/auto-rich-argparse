@@ -1,0 +1,35 @@
+[project]
+name = "auto-rich-argparse"
+version = "0.1.0"
+description = "Automatically use rich-argparse with argparse command line tools"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "Ali Hamdan", email = "ali.hamdan.dev@gmail.com" }
+]
+requires-python = ">=3.8"
+dependencies = [
+    "rich-argparse>=1.7.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "auto_rich_argparse.py",
+  "LICENSE",
+  "README.md",
+  "pyproject.toml",
+]
+
+[tool.hatch.build.targets.wheel]
+include = ["auto_rich_argparse.py"]
+
+[tool.hatch.build.hooks.autorun]
+dependencies = ["hatch-autorun"]
+code = "import auto_rich_argparse as _ara; _ara.patch_argument_parser_formatter_class()"
+
+[tool.ruff]
+line-length = 100
